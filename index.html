@@ -1,0 +1,145 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <!-- Update your html tag to include the itemscope and itemtype attributes. -->
+<html itemscope itemtype="http://schema.org/Article">
+
+<!-- Place this data between the <head> tags of your website -->
+<title>Angular Connect 2016 / London | David Breuer</title>
+<meta name="description" content="Angular Connect 2016 conference london." />
+
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="David Breuer">
+<meta itemprop="description" content="Isomorphic, modern web app, ES7, CSS4, HTML6, Typescript">
+<meta itemprop="image" content="https://instagram.com/p/3Z1OV3uuLx/media/?size=l">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@szunyog83">
+<meta name="twitter:title" content="Modern Progressive Web App">
+<meta name="twitter:description" content="Isomorphic, modern web app, ES7, CSS4, HTML6, Typescript">
+<meta name="twitter:creator" content="@szunyog83">
+<!-- Twitter summary card with large image must be at least 280x150px -->
+<meta name="twitter:image:src" content="https://instagram.com/p/3Z1OV3uuLx/media/?size=l">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="Modern Progressive Web App" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="ac-2016.github.io" />
+<meta property="og:image" content="https://instagram.com/p/3Z1OV3uuLx/media/?size=l" />
+<meta property="og:description" content="Isomorphic, modern web app, ES7, CSS4, HTML6, Typescript" />
+<meta property="og:site_name" content="Angular Connect 2016" />
+<meta property="article:published_time" content="2016-07-13T14:18:54+00:00" />
+<meta property="article:modified_time" content="2016-07-13T14:18:54+00:00" />
+<meta property="article:section" content="Web development" />
+<meta property="article:tag" content="angular, css4, html6, typescript, isomophic, progressive, web, app" />
+<meta property="fb:admins" content="100004549324082" />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,300);
+body {
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+  background: #6cc5f1;
+}
+
+.time-to {
+  text-align: center;
+  display: block;
+
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  font-size: 35px;
+  letter-spacing: 2px;
+}
+.time-to span {
+  display: block;
+  text-transform: lowercase;
+  font-size: 80px;
+  font-weight: 100;
+  color: black;
+  background: #97d1ab;
+  padding: 10px 20px;
+  margin: 20px;
+}
+.credit {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class='wrap' ng-app='app'>
+      <div class='time-to'>
+        Angular Connect 2016
+        <span countdown='' date='September 27, 2016 8:00:00'>&nbsp;...</span>
+      </div>
+
+    </div>
+    <p class="credit">Created by <a href="http://dbreuer.github.io">@dbreuer</a></p>
+    <script type="text/javascript">
+    (function () {
+        angular.module('app', []).directive('countdown', [
+            'Util',
+            '$interval',
+            function (Util, $interval) {
+                return {
+                    restrict: 'A',
+                    scope: { date: '@' },
+                    link: function (scope, element) {
+                        var future;
+                        future = new Date(scope.date);
+                        $interval(function () {
+                            var diff;
+                            diff = Math.floor((future.getTime() - new Date().getTime()) / 1000);
+                            return element.text(Util.dhms(diff));
+                        }, 1000);
+                    }
+                };
+            }
+        ]).factory('Util', [function () {
+                return {
+                    dhms: function (t) {
+                        var days, hours, minutes, seconds;
+                        days = Math.floor(t / 86400);
+                        t -= days * 86400;
+                        hours = Math.floor(t / 3600) % 24;
+                        t -= hours * 3600;
+                        minutes = Math.floor(t / 60) % 60;
+                        t -= minutes * 60;
+                        seconds = t % 60;
+                        return [
+                            days + 'D',
+                            hours + 'h',
+                            minutes + 'm',
+                            seconds + 's'
+                        ].join(' ');
+                    }
+                };
+            }]);
+    }.call(this));
+    </script>
+  </body>
+</html>
